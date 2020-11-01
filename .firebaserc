@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "amigo-navideno": {
+      "hosting": {
+        "juego-amigo-navideno": [
+          "amigo-navideno"
+        ]
+      }
+    }
+  }
+}
