@@ -1,1 +1,43 @@
-<p>juego-persona works!</p>
+<div
+  *ngIf="
+    !noEcontrado && !noEcontradoJugadorAsignable && juego && juego.descripcion
+  "
+>
+  <section>
+    <p>{{ juego.descripcion }}</p>
+    <p>Canrtidad de personas: {{ juego.personas && juego.personas.length }}</p>
+    <ul>
+      <li>Valor del Regalo: {{ juego.condiciones.valorRegalo | currency }}</li>
+      <li>
+        Fecha Hora:
+        {{ juego.condiciones.fechaHoraJuego | date: "EEEE dd-MMMM-y" }} a las
+        {{ juego.condiciones.fechaHoraJuego | date: "h:mm" }}
+      </li>
+      <li>Lugar:{{ juego.condiciones.lugar }}</li>
+      <li>Observaciones: {{ juego.condiciones.observacion }}</li>
+    </ul>
+    <ol>
+      <li *ngFor="let persona of juego.personas">
+        <p>
+          {{ persona.nombre }}
+          ({{ persona.grupoFamiliar }})
+        </p>
+      </li>
+    </ol>
+  </section>
+  <section *ngIf="!noEcontradoJugadorAsignable">
+    <section *ngIf="jugadorAsignado">
+      <p>Hola {{jugador.nombre}}, tu amigo navideño es {{ jugadorAsignado.nombre }}</p>
+    </section>
+    <div *ngIf="!jugadorAsignado">
+      <p>Hola {{jugador.nombre}}, vamos a seleccionar tú amigo navideño</p>
+      <button (click)="escogerPersona($event, this)">
+        {{ descripcionBotonEscoger }}
+      </button>
+    </div>
+  </section>
+  <section *ngIf="noEcontradoJugadorAsignable">
+    No fue posible encontrar un jugador para asignar
+  </section>
+</div>
+<div *ngIf="noEcontrado">Opps no se econtro ese juego</div>

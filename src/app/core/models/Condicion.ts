@@ -1,4 +1,3 @@
-
 export interface Condicion {
     valorRegalo: number;
     fechaHoraJuego: Date;

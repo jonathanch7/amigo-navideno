@@ -1,0 +1,30 @@
+<div *ngIf="!noEcontrado; else juegoNoEcontrado">
+  <div *ngIf="juego && juego.descripcion">
+    <p>{{ juego.descripcion }}</p>
+    <p>Canrtidad de personas: {{ juego.personas && juego.personas.length }}</p>
+    <ul>
+      <li>Valor del Regalo: {{ juego.condiciones.valorRegalo | currency }}</li>
+      <li>
+        Fecha Hora:
+        {{ juego.condiciones.fechaHoraJuego | date: "EEEE dd-MMMM-y" }} a las
+        {{ juego.condiciones.fechaHoraJuego | date: "h:mm" }}
+      </li>
+      <li>Lugar:{{ juego.condiciones.lugar }}</li>
+      <li>Observaciones: {{ juego.condiciones.observacion }}</li>
+    </ul>
+    <ol>
+      <li *ngFor="let persona of juego.personas">
+        <p [ngClass]="persona.idPersonaAsignada ? 'asignado':''">
+          {{ persona.nombre }}
+          <span *ngIf="persona.grupoFamiliar">({{ persona.grupoFamiliar }})</span>
+          <button (click)="copiaValor(urlSorteo+persona.id)">Copiar URL de Sorteo</button>
+        </p>
+      </li>
+    </ol>
+    <p>
+      Recuerda que a esta URL puedes ingresar para consultar si todos ya tiene asignado su amigo navideño.
+      {{urlJuego}}
+    </p>
+  </div>
+</div>
+<ng-template #juegoNoEcontrado> Opps no se econtro ese juego </ng-template>

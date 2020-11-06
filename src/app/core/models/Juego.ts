@@ -1,10 +1,11 @@
 import {Condicion} from './Condicion';
+import { IModelo } from './IModelo';
 import { Persona } from './Persona';
 
-export interface Juego {
-    id: string;
-    ano: number;
+export interface Juego extends IModelo {
+    id?: string;
+    ano?: number;
     descripcion: string;
-    condiciones: Condicion[];
-    personas: Persona[];
+    condiciones: Condicion;
+    personas?: Persona[];
 }
