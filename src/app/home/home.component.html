@@ -1,2 +1,35 @@
-<h1>AMIGO NAVIDEÑO</h1>
-<a routerLink="/juego">Crea tu propio juego</a>
+<div class="window">
+  <div class="santa">
+    <div class="head">
+      <div class="face">
+        <div class="redhat">
+          <div class="whitepart"></div>
+          <div class="redpart"></div>
+          <div class="hatball"></div>
+        </div>
+        <div class="eyes"></div>
+        <div class="beard">
+          <div class="nouse"></div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+      <div class="ears"></div>
+    </div>
+    <div class="body"></div>
+  </div>
+</div>
+<div class="message">
+  <h1>¡AMIGO NAVIDEÑO!</h1>
+  <h2>Crea tu propio Juego de amigo Navideño</h2>
+  <div class="center-align">
+    <button
+      class="waves-effect waves-light btn-large btn-envio"
+      [routerLink]="['/juego']"
+    >
+      Crea tu propio juego
+    </button>
+  </div>
+  <!-- 
+  <button [routerLink]="['/juego']" class="btn-envio">Crea tu propio juego</button>
+  -->
+</div>

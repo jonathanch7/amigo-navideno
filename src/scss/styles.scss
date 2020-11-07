@@ -1,0 +1,20 @@
+@import "./materialize-imports.scss";
+
+$fuente: "Mountains of Christmas" !important;
+
+* {
+  font-family: $fuente;
+}
+body {
+  background-color: #de2f32;
+}
+h1, h2{
+    font-weight: bold;
+}
+.btn-envio {
+  background-color: $secondary-color;
+  color: $primary-color;
+  font-weight: bold;
+  margin: 15px auto;
+}
+

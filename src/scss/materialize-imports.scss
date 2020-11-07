@@ -1,0 +1,20 @@
+@import "./sass/components/_color-variables.scss"; //importamos las variables actauales de materialize
+@import "./colors"; //aqui sobrescribimos las variables con nuestro tema
+@import "./sass/materialize.scss"; //importamos todos los estilos y componentes de materialize
+
+.z-depth-1,
+.sidenav,
+.collapsible,
+.dropdown-content,
+.btn-floating,
+.btn,
+.btn-small,
+.btn-large,
+.toast,
+.card,
+.card-panel,
+nav {
+  box-shadow: 0 2px 2px 0 rgba(248, 231, 220, 0.14),
+    0 3px 1px -2px rgba(248, 231, 220, 0.12),
+    0 1px 5px 0 rgba(248, 231, 220, 0.2) !important;
+}
