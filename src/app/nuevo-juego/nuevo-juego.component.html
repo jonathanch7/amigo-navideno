@@ -1,6 +1,7 @@
-<h2>cree su juego</h2>
-<form [formGroup]="juegoForm" (ngSubmit)="crearJuego($event)">
-  <label for="descripcion">Descripcion</label>
+<div class="row">
+<h2>Cree su juego</h2>
+<form [formGroup]="juegoForm" (ngSubmit)="crearJuego($event)" class="col s12">
+  <label for="descripcion">Descripción:</label>
   <textarea id="descripcion" formControlName="descripcion" required></textarea>
   <p *ngIf="campoJuego('descripcion').hasError('required')">
     El campo es requerido
@@ -42,7 +43,7 @@
     </li>
   </ul>
   <h3>Personas que participan</h3>
-  <label for="cantidadPersonas">Cantidad de personas</label>
+  <label for="cantidadPersonas">Cantidad de personas:</label>
   <input id="cantidadPersonas" formControlName="cantidadPersonas" type="number" readonly required placeholder="0"/>
   <p *ngIf="campoJuego('cantidadPersonas').hasError('required')">
     El campo es requerido
@@ -50,8 +51,8 @@
   <p *ngIf="campoJuego('cantidadPersonas').hasError('min')">
     La cantidad minima de personas son 3
   </p>
-  
-  <label for="nombrePersona">Nombre</label>
+
+  <label for="nombrePersona">Nombre:</label>
   <input
     id="nombrePersona"
     [(ngModel)]="nombreNuevaPersona.nombre"
@@ -59,7 +60,7 @@
     type="text"
     placeholder="Ej: Pepito"
   />
-  <label for="nombrePersona">Grupo Familiar</label>
+  <label for="nombrePersona">Grupo Familiar: </label>
   <input
     id="grupoFamiliar"
     [(ngModel)]="nombreNuevaPersona.grupoFamiliar"
@@ -67,7 +68,7 @@
     type="grupoFamiliar"
     placeholder="Ej: tia pepita"
   />
-  <button (click)="addPersona($event)">Agregar Persona</button>
+  <button (click)="addPersona($event)" class="waves-effect waves-light btn"> Agregar Persona</button>
   <ul>
     <li *ngFor="let persona of personas">
       <span>{{ persona.nombre }}</span> <span *ngIf="persona.grupoFamiliar!==null">({{ persona.grupoFamiliar }})</span>
@@ -84,5 +85,13 @@
         <button (click)="eliminarPersona(persona.nombre)">X</button>
     </li>
   </ul>
-  <button [disabled]="juegoForm.invalid">Crear Juego</button>
+  <div class="center-align">
+    <button
+      class="waves-effect waves-light btn-large btn-envio"
+      [disabled]="juegoForm.invalid"
+    >
+    Crear Juego
+    </button>
+  </div>
 </form>
+</div>
