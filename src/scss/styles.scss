@@ -2,7 +2,7 @@
 
 $fuente: "Mountains of Christmas" !important;
 
-* {
+*:not(i) {
   font-family: $fuente;
 }
 body {

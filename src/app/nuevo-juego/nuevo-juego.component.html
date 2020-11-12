@@ -1,7 +1,7 @@
 <div class="row">
 <h2>Cree su juego</h2>
 <form [formGroup]="juegoForm" (ngSubmit)="crearJuego($event)" class="col s12">
-  <label for="descripcion">Descripción:</label>
+  <label for="descripcion"><i class="material-icons">create</i>Descripción:</label>
   <textarea id="descripcion" formControlName="descripcion" required></textarea>
   <p *ngIf="campoJuego('descripcion').hasError('required')">
     El campo es requerido
@@ -9,14 +9,14 @@
   <h3>Condiciones</h3>
   <ul formGroupName="condiciones">
     <li>
-      <label for="valorRegalo">Valor mínimo del Regalo:</label>
+      <label for="valorRegalo"><i class="material-icons">star_rate</i>Valor mínimo del Regalo:</label>
       <input id="valorRegalo" formControlName="valorRegalo" type="number" required/>
       <p *ngIf="campoCondicion('valorRegalo').errors && campoCondicion('valorRegalo').dirty && campoCondicion('valorRegalo').hasError('required')">
         El campo es requerido
       </p>
     </li>
     <li>
-      <label for="fechaHoraJuego">Fecha y Hora:</label>
+      <label for="fechaHoraJuego"><i class="material-icons">star_rate</i>Fecha y Hora:</label>
       <input
         id="fechaHoraJuego"
         formControlName="fechaHoraJuego"
@@ -28,14 +28,14 @@
       </p>
     </li>
     <li>
-      <label for="lugar">Lugar:</label>
+      <label for="lugar"><i class="material-icons">explore</i>Lugar:</label>
       <input id="lugar" formControlName="lugar" type="text" required/>
       <p *ngIf="campoCondicion('lugar').hasError('required')">
         El campo es requerido
       </p>
     </li>
     <li>
-      <label for="observacion">Observaciones:</label>
+      <label for="observacion"><i class="material-icons">create</i>Observaciones:</label>
       <textarea id="observacion" formControlName="observacion" type="text" required></textarea>
       <p *ngIf="campoCondicion('observacion').hasError('required')">
         El campo es requerido
@@ -43,7 +43,7 @@
     </li>
   </ul>
   <h3>Personas que participan</h3>
-  <label for="cantidadPersonas">Cantidad de personas:</label>
+  <label for="cantidadPersonas"><i class="material-icons">face</i>Cantidad de personas:</label>
   <input id="cantidadPersonas" formControlName="cantidadPersonas" type="number" readonly required placeholder="0"/>
   <p *ngIf="campoJuego('cantidadPersonas').hasError('required')">
     El campo es requerido
@@ -52,7 +52,7 @@
     La cantidad minima de personas son 3
   </p>
 
-  <label for="nombrePersona">Nombre:</label>
+  <label for="nombrePersona"><i class="material-icons">face</i>Nombre:</label>
   <input
     id="nombrePersona"
     [(ngModel)]="nombreNuevaPersona.nombre"
@@ -66,9 +66,9 @@
     [(ngModel)]="nombreNuevaPersona.grupoFamiliar"
     [ngModelOptions]="{ standalone: true }"
     type="grupoFamiliar"
-    placeholder="Ej: tia pepita"
+    placeholder="Ej: tia pepita" class="agregar-gf"
   />
-  <button (click)="addPersona($event)" class="waves-effect waves-light btn"> Agregar Persona</button>
+  <button (click)="addPersona($event)" class=" btn"> Agregar Persona</button>
   <ul>
     <li *ngFor="let persona of personas">
       <span>{{ persona.nombre }}</span> <span *ngIf="persona.grupoFamiliar!==null">({{ persona.grupoFamiliar }})</span>
@@ -82,7 +82,7 @@
           {{ per.nombre }}
         </option>
       </select>
-        <button (click)="eliminarPersona(persona.nombre)">X</button>
+        <button (click)="eliminarPersona(persona.nombre)" class=" btn">X</button>
     </li>
   </ul>
   <div class="center-align">

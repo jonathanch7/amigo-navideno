@@ -1,4 +1,4 @@
-<div *ngIf="!noEcontrado; else juegoNoEcontrado">
+<div *ngIf="!noEcontrado; else juegoNoEcontrado" class="row">
   <div *ngIf="juego && juego.descripcion">
     <p>{{ juego.descripcion }}</p>
     <p>Canrtidad de personas: {{ juego.personas && juego.personas.length }}</p>
