@@ -42,7 +42,6 @@ export class JuegoPersonaComponent implements OnInit {
         .getById(this.idJugador)
         .pipe(take(1))
         .subscribe((per) => {
-          console.log('sssss');
           if (per) {
             this.jugador = per;
             this.cargarJuego();
@@ -64,7 +63,6 @@ export class JuegoPersonaComponent implements OnInit {
   }
 
   private cargarJuego(): void {
-    console.log('cargarJuego');
     this.juegoService
       .getById(this.idJuego)
       .pipe(take(1))
