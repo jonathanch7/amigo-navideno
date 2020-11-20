@@ -1,48 +1,29 @@
+p, i, li{
+  color: #F0F8FF;
+  font-size: 1.1em;
+}
 
-/*Muneñco*/
-.animacion-chao{
-  width: 100%;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+span{
+  color: #F0F993;
 }
-.plane{
-position: relative;
--webkit-animation: float 3s infinite;
-        animation: float 3s infinite;
+.titulo{
+  text-align: center;
+  font-size: 1.6em;
 }
-@-webkit-keyframes float{
-50%{
-  -webkit-transform: translateY(25px);
-          transform: translateY(25px);
+.asignado{
+  color: #B8FF33;
 }
+
+.strong{
+font-weight: 600;
+font-size: 1em;
+color: #F0F993;
 }
-@keyframes float{
-50%{
-  -webkit-transform: translateY(25px);
-          transform: translateY(25px);
-}
-}
-.hand{
--webkit-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-        transform: rotate(10deg);
--webkit-animation: wave 1.5s infinite;
-        animation: wave 1.5s infinite;
--webkit-transform-origin: center;
-    -ms-transform-origin: center;
-        transform-origin: center;
-}
-.blade{
--webkit-animation:spin 1s infinite linear;
-        animation:spin 1s infinite linear;
--webkit-transform-origin: 50% 54%;
-    -ms-transform-origin: 50% 54%;
-        transform-origin: 50% 54%;
-}
-@-webkit-keyframes spin{
-100%{
-  -webkit-transform: rotateX(360deg);
-          transform: rotateX(360deg);
-}
+.btn{
+  margin: 6px;
+  font-size: 0.6em;
+  height: 30px;
+  width: 30%;
 }
 
 @media screen and (max-width: 450px) {
@@ -51,23 +32,17 @@ a{
    padding:5px 8px 5px 8px;
 }
 }
-.asignado{
-    color: green;
-}
-.container{
-  width: 100%;
-  background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
-  padding: 10px 120px 120px 120px;
-  font-size: 1.3em;
-  line-height: 50px;
+
+@media (max-width: 740px) {
+    .btn{
+      margin: 6px;
+      font-size: 0.6em;
+      height: 30px;
+      width: 70%;
 }
 .strong{
   font-weight: 600;
-  font-size: 0.8em;
-}
-.btn{
-    margin: 6px;
-    font-size: 0.6em;
-    height: 30px;
-    width: 53%;
-}
+  font-size: 0.6em;
+  color: #F0F993;
+  }
+  }

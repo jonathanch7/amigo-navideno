@@ -1,99 +1,10 @@
-
-
-/*Muneñco*/
-.animacion-chao{
-  width: 100%;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-}
-.plane{
-position: relative;
--webkit-animation: float 3s infinite;
-        animation: float 3s infinite;
-}
-@-webkit-keyframes float{
-50%{
-  -webkit-transform: translateY(25px);
-          transform: translateY(25px);
-}
-}
-@keyframes float{
-50%{
-  -webkit-transform: translateY(25px);
-          transform: translateY(25px);
-}
-}
-.hand{
--webkit-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-        transform: rotate(10deg);
--webkit-animation: wave 1.5s infinite;
-        animation: wave 1.5s infinite;
--webkit-transform-origin: center;
-    -ms-transform-origin: center;
-        transform-origin: center;
-}
-.blade{
--webkit-animation:spin 1s infinite linear;
-        animation:spin 1s infinite linear;
--webkit-transform-origin: 50% 54%;
-    -ms-transform-origin: 50% 54%;
-        transform-origin: 50% 54%;
-}
-@-webkit-keyframes spin{
-100%{
-  -webkit-transform: rotateX(360deg);
-          transform: rotateX(360deg);
-}
-}
-@keyframes spin{
-100%{
-  -webkit-transform: rotateX(360deg);
-          transform: rotateX(360deg);
-}
-}
-@-webkit-keyframes wave{
-50%{
-  -webkit-transform: rotate(-10deg);
-          transform: rotate(-10deg);
-}
-}
-@keyframes wave{
-50%{
-  -webkit-transform: rotate(-10deg);
-          transform: rotate(-10deg);
-}
-}
-a{
-  color: #F40009;
-  font-family: "Poppins",sans-serif;
-  position:absolute;
-  right:20px ;
-  top:20px;
-  border:2px solid #F40009;
-  text-decoration:none;
-}
-@media screen and (min-width: 451px) {
-a{
-  font-size: 20px;
-   padding:8px 12px 8px 12px;
-}
-}
-
-@media screen and (max-width: 450px) {
-a{
-  font-size: 14px;
-   padding:5px 8px 5px 8px;
-}
-}
-
-.contenido{
-  /*background-image: linear-gradient(to top, #ebc0fd 0%, #d9ded8 100%);*/
-  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
-  margin-top: 0%;
-  font-size: 1.3em;
-  line-height: 35px;
-  padding: 13px;
-}
+/*.contenido{
+  width: 50%;
+  padding: 50px 150px 130px 150px;
+  border-radius: 80px;
+  box-shadow: inset 60px 44px 69px 43px #b7fffe;
+  margin: 10px auto;
+}*/
 .espaciado{
   margin-bottom: 46px;
   padding-top: 15px;
@@ -104,19 +15,42 @@ a{
   text-align: center;
   font-size: 1.6em;
   text-transform: uppercase;
+  color: #F0F8FF;
 }
 span{
   font-weight: 800;
+  color: #F0F8FF;
+}
+li{
+  color: #F0F993;
+  font-size: 1.3em;
 }
 .boton{
   text-align: center;
-}
+}/*
 .btn{
-  width: 65%;
+  width: 40%;
   height: 50px;
   font-size: 1.3em;
-  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-}
+  background-color: #58B55C;
+  margin-bottom: 30px;
+}*/
 .material-icons{
   font-size: 1.2em;
 }
+
+.seleccion{
+  font-size: 2em;
+  text-align: center;
+  color: #F0F993;
+}/*
+@media (max-width: 740px) {
+  .btn{
+    width: 40%;
+    height: 50px;
+    font-size: 1em;
+    background-color: #58B55C;
+    margin-bottom: 30px;
+  }
+}
+*/

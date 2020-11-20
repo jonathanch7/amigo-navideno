@@ -1,0 +1,52 @@
+
+/*Muneñco*/
+
+
+.lluvia{
+  color: #fff;
+  background:linear-gradient(#9df, #5047E4);
+  height: 40vh;
+  margin: 0;
+  display: flex;
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.santa-image{
+  position:fixed;
+  top: 10vh;
+  right:0;
+  left:0;
+}
+
+img{
+  float:right;
+  position:relative;
+  animation: santa 15s infinite;
+
+}
+@keyframes santa{
+  from{right:-30%;}
+  to {right:100%;}
+}
+
+
+
+@media (max-width: 740px) {
+  .lluvia{
+    height: 30vh;
+  }
+  .santa-image{
+    img{
+      width: 250px;
+    }
+  }
+
+
+  @keyframes santa{
+    from{right:-60%;}
+    to {right:100%;}
+  }
+}
+
+

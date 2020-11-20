@@ -10,6 +10,7 @@ body {
 }
 h1, h2{
     font-weight: bold;
+    font-size: 2.4em;
 }
 .btn-envio {
   background-color: $secondary-color;
@@ -18,3 +19,25 @@ h1, h2{
   margin: 15px auto;
 }
 
+.contenedor-ice{
+  width: 50%;
+  padding: 50px 150px 100px 150px;
+  border-radius: 80px;
+  box-shadow: inset 60px 44px 69px 43px #b7fffe;
+  margin: 10px auto;
+}
+@media (max-width: 740px) {
+  .contenedor-ice {
+    width: 90%;
+    padding: 10px 70px 70px 70px;
+    border-radius: 40px;
+    box-shadow: inset 25px 25px 50px 23px rgb(183 255 254);
+    margin: 10px auto;
+  }
+  .btn{
+    height: 50px;
+    /*font-size: 1em;*/
+    background-color: #58B55C;
+    margin-bottom: 30px;
+  }
+}

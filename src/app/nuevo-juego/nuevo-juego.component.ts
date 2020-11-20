@@ -11,6 +11,8 @@ import { Persona } from '../core/models/Persona';
 import { PersonaService } from '../core/services/persona/persona.service';
 import { Router } from '@angular/router';
 
+declare var M: any;
+
 @Component({
   selector: 'app-nuevo-juego',
   templateUrl: './nuevo-juego.component.html',
@@ -34,7 +36,14 @@ export class NuevoJuegoComponent implements OnInit {
     this.construirForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    setTimeout(function () {
+      document.addEventListener('DOMContentLoaded', function() {
+        const elems = document.querySelectorAll('select');
+        const instances = M.FormSelect.init(elems);
+      });
+    }, 200);
+  }
 
   crearJuego(event: Event): void {
     event.preventDefault();
@@ -117,7 +126,6 @@ export class NuevoJuegoComponent implements OnInit {
         this.nombreNuevaPersona.grupoFamiliar = null;
       }
     }
-    this.campoJuego('cantidadPersonas').setValue(this.personas.length);
   }
 
   public eliminarPersona(nombre: string): void {
@@ -154,7 +162,6 @@ export class NuevoJuegoComponent implements OnInit {
   private construirForm(): void {
     this.juegoForm = this.formBuilder.group({
       descripcion: ['', [Validators.required]],
-      cantidadPersonas: ['', [Validators.required, Validators.min(3)]],
       condiciones: this.formBuilder.group({
         valorRegalo: ['', [Validators.required]],
         fechaHoraJuego: ['', [Validators.required]],
