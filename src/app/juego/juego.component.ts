@@ -46,7 +46,7 @@ export class JuegoComponent implements OnInit {
             this.juego = dataJuego;
             this.juego.id = this.idJuego;
             const f: any = dataJuego.condiciones.fechaHoraJuego;
-            this.juego.condiciones.fechaHoraJuego = new Date(f.seconds);
+            this.juego.condiciones.fechaHoraJuego = new Date(f.seconds * 1000);
             this.cargarPersonas();
             this.urlSorteo = `${location.origin}/juego/${this.juego.id}/sorteo/`;
           } else {

@@ -1,43 +1,96 @@
 @import "./materialize-imports.scss";
 
-$fuente: "Mountains of Christmas" !important;
+@import url("https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap");
+
+$fuente: "Mountains of Christmas", cursive;
+$btn-color: #58b55c;
 
 *:not(i) {
-  font-family: $fuente;
+  font-family: $fuente !important;
 }
 body {
-  background-color: #5047e4;
+  font-size: 18px;
+  background-color: $fondo-color;
 }
-h1, h2{
-    font-weight: bold;
-    font-size: 2.4em;
+h1,
+h2 {
+  font-weight: bold;
+  font-size: 2.4em;
+  text-align: center;
+  color: $primary-color;
 }
 .btn-envio {
   background-color: $secondary-color;
   color: $primary-color;
   font-weight: bold;
   margin: 15px auto;
+  border-radius: 10px;
 }
 
-.contenedor-ice{
+.contenedor-ice {
   width: 50%;
   padding: 50px 150px 100px 150px;
   border-radius: 80px;
-  box-shadow: inset 60px 44px 69px 43px #b7fffe;
+  box-shadow: inset 15px 10px 46px 23px $contraste-fondo;
   margin: 10px auto;
 }
+
+.titulo-personzalizado,
+.campo-personzalizado {
+  color: $primary-color;
+}
+
+.error {
+  color: $error-color;
+  font-size: 12px;
+}
+.exito {
+  color: $success-color;
+}
+.eliminar {
+  color: $error-color;
+  cursor: pointer;
+}
+.cajon {
+  border: 1px dotted $primary-color;
+}
+
+.margen-izquierda {
+  margin-left: 3rem !important;
+}
+
+.btn-icono {
+  color: $btn-color;
+}
+
+.texto-resaltado{
+  color: $resaltado-primary-color;
+  font-weight: 600;
+}
+
+p, span, ul li{
+  font-size: 1em;
+}
+
+.tamano-mediano{
+  font-size: 1.4em;
+}
+
 @media (max-width: 740px) {
+  body {
+    font-size: 15px;
+  }
   .contenedor-ice {
     width: 90%;
-    padding: 10px 70px 70px 70px;
+    padding: 10px 40px 70px;
     border-radius: 40px;
-    box-shadow: inset 25px 25px 50px 23px rgb(183 255 254);
+    box-shadow: inset 25px 25px 50px 2px rgb(183 255 254);
     margin: 10px auto;
   }
-  .btn{
+  .btn {
     height: 50px;
-    /*font-size: 1em;*/
-    background-color: #58B55C;
+    background-color: $btn-color;
     margin-bottom: 30px;
+    border-radius: 10px;
   }
 }

@@ -1,145 +1,266 @@
-
 <app-header-trineo></app-header-trineo>
 <div class="contenedor-ice">
-  <h2>Cree su juego</h2>
+  <h2 class="titulo-personzalizado">Cree su juego</h2>
   <form [formGroup]="juegoForm" (ngSubmit)="crearJuego($event)" class="col s12">
-    <label for="descripcion"
-      ><i class="material-icons">create</i>Descripción:</label
-    >
-    <textarea
-      class="cajon materialize-textarea"
-      id="descripcion"
-      formControlName="descripcion"
-      required
-    ></textarea>
-    <p *ngIf="campoJuego('descripcion').hasError('required')">
-      El campo es requerido
-    </p>
-    <h3>Condiciones</h3>
-    <ul formGroupName="condiciones">
-      <li>
-        <label for="valorRegalo"
-          ><i class="material-icons">star_rate</i>Valor mínimo del
-          Regalo:</label
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">create</i>
+        <label for="descripcion"
+          >Descripción:<span
+            [ngClass]="campoRequerido('descripcion', true) ? 'error' : 'exito'"
+            >*</span
+          ></label
         >
-        <input
-          id="valorRegalo"
-          formControlName="valorRegalo"
-          type="number"
-          required
-        />
-        <p
-          *ngIf="
-            campoCondicion('valorRegalo').errors &&
-            campoCondicion('valorRegalo').dirty &&
-            campoCondicion('valorRegalo').hasError('required')
-          "
-        >
-          El campo es requerido
-        </p>
-      </li>
-      <li>
-        <label for="fechaHoraJuego"
-          ><i class="material-icons">star_rate</i>Fecha y Hora:</label
-        >
-        <input
-          id="fechaHoraJuego"
-          formControlName="fechaHoraJuego"
-          type="datetime-local"
-          required
-        />
-        <p *ngIf="campoCondicion('fechaHoraJuego').hasError('required')">
-          El campo es requerido
-        </p>
-      </li>
-      <li>
-        <label for="lugar"><i class="material-icons">explore</i>Lugar:</label>
-        <input id="lugar" formControlName="lugar" type="text" required />
-        <p *ngIf="campoCondicion('lugar').hasError('required')">
-          El campo es requerido
-        </p>
-      </li>
-      <li>
-        <label for="observacion"
-          ><i class="material-icons">create</i>Observaciones:</label
-        >
+
         <textarea
           class="cajon materialize-textarea"
-          id="observacion"
-          formControlName="observacion"
-          type="text"
+          id="descripcion"
+          formControlName="descripcion"
           required
         ></textarea>
-        <p *ngIf="campoCondicion('observacion').hasError('required')">
+        <span class="helper-text">Será el título del juego</span>
+        <p *ngIf="campoError('descripcion', 'required', true)" class="error">
           El campo es requerido
         </p>
-      </li>
-    </ul>
-    <h3>Personas que participan</h3>
+      </div>
+    </div>
+    <div class="row" formGroupName="condiciones">
+      <h3 class="titulo-personzalizado">Condiciones</h3>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">attach_money</i>
+          <label for="valorRegalo"
+            >Valor del Regalo:<span
+              [ngClass]="campoRequerido('valorRegalo') ? 'error' : 'exito'"
+              >*</span
+            ></label
+          >
+          <input
+            id="valorRegalo"
+            formControlName="valorRegalo"
+            type="number"
+            class="validate"
+            required
+          />
+          <span class="helper-text">Valor mínimo del regalo</span>
+          <p *ngIf="campoError('valorRegalo', 'required')" class="error">
+            El campo es requerido
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <i class="material-icons prefix">date_range</i>
+          <label for="fechaJuego"
+            >Fecha:<span
+              [ngClass]="campoRequerido('fechaJuego') ? 'error' : 'exito'"
+              >*</span
+            ></label
+          >
+          <input
+            #fechaJuego
+            id="fechaJuego"
+            formControlName="fechaJuego"
+            type="text"
+            class="datepicker"
+            required
+            (change)="cambioCampoCondicion('fechaJuego', fechaJuego)"
+          />
+          <span class="helper-text"
+            >Fecha pactada de la reunión de entrega.</span
+          >
+          <p *ngIf="campoError('fechaJuego', 'required')" class="error">
+            El campo es requerido
+          </p>
+        </div>
+        <div class="input-field col s12 m4">
+          <i class="material-icons prefix">access_time</i>
+          <label for="horaJuego"
+            >Hora:<span
+              [ngClass]="campoRequerido('horaJuego') ? 'error' : 'exito'"
+              >*</span
+            ></label
+          >
+          <input
+            #horaJuego
+            id="horaJuego"
+            formControlName="horaJuego"
+            type="text"
+            class="timepicker"
+            (change)="cambioCampoCondicion('horaJuego', horaJuego)"
+            required
+          />
+          <span class="helper-text"
+            >Hora pactada de la reunión de entrega.</span
+          >
+          <p *ngIf="campoError('horaJuego', 'required')" class="error">
+            El campo es requerido
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">explore</i>
+          <label for="lugar"
+            >Lugar:<span [ngClass]="campoRequerido('lugar') ? 'error' : 'exito'"
+              >*</span
+            ></label
+          >
+          <input
+            id="lugar"
+            formControlName="lugar"
+            type="text"
+            class="validate"
+            required
+          />
+          <span class="helper-text"
+            >Dirección o ubicación donde se hará la reunión de entrega.</span
+          >
+          <p *ngIf="campoError('lugar', 'required')" class="error">
+            El campo es requerido
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">create</i>
+          <label for="observacion"
+            >Observaciones:<span
+              [ngClass]="campoRequerido('observacion') ? 'error' : 'exito'"
+              >*</span
+            ></label
+          >
+          <textarea
+            class="cajon validate materialize-textarea"
+            id="observacion"
+            formControlName="observacion"
+            type="text"
+            required
+          ></textarea>
+          <span class="helper-text"
+            >Sugerencias y/o condiciones adicionales. Ej: Llevar un dulce para
+            compartir.</span
+          >
+          <p *ngIf="campoError('observacion', 'required')" class="error">
+            El campo es requerido
+          </p>
+        </div>
+      </div>
+    </div>
 
-    <div>
-      <div>
-        <label for="nombrePersona"
-          ><i class="material-icons">face</i>Nombre:</label
-        >
-        <input
-          id="nombrePersona"
-          [(ngModel)]="nombreNuevaPersona.nombre"
-          [ngModelOptions]="{ standalone: true }"
-          type="text"
-          placeholder="Ej: Pepito"
-        />
+    <div class="row">
+      <h3 class="titulo-personzalizado">Personas que participan</h3>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">face</i>
+          <label for="nombrePersona"
+            >Nombre de Participante:<span
+              [ngClass]="nombreNuevaPersona.nombre ? 'exito' : ''"
+              >*</span
+            ></label
+          >
+          <input
+            id="nombrePersona"
+            [(ngModel)]="nombreNuevaPersona.nombre"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            class="validate"
+          />
+          <span class="helper-text">El nombre debe ser único</span>
+        </div>
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">group</i>
+          <label for="grupoFamiliar">Grupo Familiar:</label>
+          <input
+            id="grupoFamiliar"
+            [(ngModel)]="nombreNuevaPersona.grupoFamiliar"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            class="validate"
+          />
+          <span class="helper-text"
+            >Las personas del mismo grupo familiar no podrán escogerse entre
+            ellos</span
+          >
+        </div>
       </div>
-      <div>
-        <label for="nombrePersona">Grupo Familiar: </label>
-        <input
-          id="grupoFamiliar"
-          [(ngModel)]="nombreNuevaPersona.grupoFamiliar"
-          [ngModelOptions]="{ standalone: true }"
-          type="text"
-          placeholder="Ej: tia pepita"
-          class="agregar-gf"
-        />
-      </div>
-      <p *ngIf="!personas || personas.length<3">
+      <p
+        *ngIf="!personas || personas.length < 3"
+        class="row error margen-izquierda"
+      >
         La cantidad mínima de personas son 3
       </p>
-      <button (click)="addPersona($event)" class="btn">Agregar Persona</button>
+      <div class="row margen-izquierda">
+        <button
+          (click)="addPersona($event)"
+          [disabled]="!nombreNuevaPersona.nombre"
+          class="waves-effect waves-light btn btn"
+        >
+          <i class="material-icons left">person_add</i>
+          Agregar Persona
+        </button>
+      </div>
     </div>
-    <ul>
-      <li *ngFor="let persona of personas" class="listado">
-        <span>{{ persona.nombre }}</span>
-        <span *ngIf="persona.grupoFamiliar !== null"
-          >({{ persona.grupoFamiliar }})</span
-        >
-        <select
-          (change)="restringirPersona(persona.nombre, $event.target.value)"
-        >
-          <option value="">Seleccione persona restringida</option>
-          <option
-            *ngIf="persona.idPersonaRestringida"
-            value="{{ persona.idPersonaRestringida }}"
-            selected
-          >
-            {{ persona.idPersonaRestringida }}
-          </option>
-          <option
-            *ngFor="let per of personas | filtroPersonaRestringida: persona"
-            value="{{ per.nombre }}"
-          >
-            {{ per.nombre }}
-          </option>
-        </select>
-        <i class="material-icons" (click)="eliminarPersona(persona.nombre)"
-          >backspace</i
-        >
-      </li>
-    </ul>
+    <div class="row" *ngIf="personas && personas.length > 0">
+      <h3 class="titulo-personzalizado">Participantes</h3>
+      <p class="campo-personzalizado">
+        Se puede restringir que un participante no sea seleccionado por otro,
+        esto con el fin de que a la persona no le salga la misma persona del año
+        anterior.
+      </p>
+      <ul #listado>
+        <li *ngFor="let persona of personas" class="item-listado">
+          <div>
+            <i
+              class="material-icons eliminar omitir-color"
+              (click)="eliminarPersona(persona.nombre)"
+              >delete</i
+            >
+            <span class="campo-personzalizado">{{ persona.nombre }}</span>
+            <span
+              class="campo-personzalizado"
+              *ngIf="persona.grupoFamiliar !== null"
+              >({{ persona.grupoFamiliar }})</span
+            >
+          </div>
+          <div class="contenedor-persona-restringida">
+            <select
+              (change)="restringirPersona(persona.nombre, $event.target.value)"
+            >
+              <option value="" class="campo-personzalizado">
+                --Restringir--
+              </option>
+              <option
+                *ngIf="persona.idPersonaRestringida"
+                value="{{ persona.idPersonaRestringida }}"
+                selected
+                class="campo-personzalizado"
+              >
+                {{ persona.idPersonaRestringida }}
+              </option>
+              <option
+                *ngFor="let per of personas | filtroPersonaRestringida: persona"
+                value="{{ per.nombre }}"
+                class="campo-personzalizado"
+              >
+                {{ per.nombre }}
+                <span
+                  class="campo-personzalizado"
+                  *ngIf="per.grupoFamiliar !== null"
+                  >({{ per.grupoFamiliar }})</span
+                >
+              </option>
+            </select>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="center-align">
       <button
         class="waves-effect waves-light btn-large btn-envio"
         [disabled]="juegoForm.invalid"
       >
+        <i class="material-icons left">save</i>
         Crear Juego
       </button>
     </div>

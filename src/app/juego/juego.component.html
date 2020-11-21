@@ -2,30 +2,68 @@
 
 <div *ngIf="!noEcontrado; else juegoNoEcontrado" class="contenedor-ice">
   <div *ngIf="juego && juego.descripcion">
-    <p class="titulo">{{ juego.descripcion }}</p>
-    <p><i class="material-icons">face</i> Cantidad de personas: <span> {{ juego.personas && juego.personas.length }}</span></p>
-    <ul>
-      <li><i class="material-icons">star</i> Valor del Regalo:<span>{{ juego.condiciones.valorRegalo | currency: 'COP' }}</span></li>
-      <li><i class="material-icons">create</i>
-        Fecha Hora:
-        <span>{{ juego.condiciones.fechaHoraJuego | date: "EEEE dd-MMMM-y" }}</span> a las
-        <span>{{ juego.condiciones.fechaHoraJuego | date: "h:mm" }}</span>
+    <h2 class="titulo-personzalizado">{{ juego.descripcion | uppercase }}</h2>
+    <p class="campo-personzalizado">
+      <i class="material-icons">face</i>
+      <span class="texto-resaltado">Cantidad de personas:</span>
+      {{ juego.personas && juego.personas.length }}
+    </p>
+    <ul class="campo-personzalizado">
+      <li>
+        <i class="material-icons">attach_money</i>
+        <span class="texto-resaltado">Valor del Regalo:</span
+        >{{ juego.condiciones.valorRegalo | currency: "COP" }}
       </li>
-      <li><i class="material-icons">explore</i> Lugar:<span>{{ juego.condiciones.lugar }}</span> </li>
-      <li><i class="material-icons">create</i> Observaciones:<span>{{ juego.condiciones.observacion }}</span> </li>
+      <li>
+        <i class="material-icons">date_range</i>
+        <span class="texto-resaltado">Fecha:</span>
+        {{
+          juego.condiciones.fechaHoraJuego | date: "EEEE dd 'de' MMMM 'del' y"
+        }}
+      </li>
+      <li>
+        <i class="material-icons">access_time</i>
+        <span class="texto-resaltado">Hora:</span
+        >{{ juego.condiciones.fechaHoraJuego | date: "h:mm a" }}
+      </li>
+      <li>
+        <i class="material-icons">explore</i>
+        <span class="texto-resaltado">Lugar:</span>{{ juego.condiciones.lugar }}
+      </li>
+      <li>
+        <i class="material-icons">create</i>
+        <span class="texto-resaltado">Observaciones:</span
+        >{{ juego.condiciones.observacion }}
+      </li>
     </ul>
-    <ol>
+    <p class="campo-personzalizado">
+      Copie la URL dando click en el icono
+      <i class="material-icons">content_copy</i>, y compartala a la persona
+      correspondiente para que esa persona pueda entrar a escoger su amigo/a
+      navideño. <br />
+      El amigo/a navideño de cada persona será al azar teniendo en cuenta que no
+      sea del mismo grupo familiar y no esté restringido.
+    </p>
+    <ol class="campo-personzalizado">
       <li *ngFor="let persona of juego.personas">
-        <p [ngClass]="persona.idPersonaAsignada ? 'asignado':''">
+        <p [ngClass]="persona.idPersonaAsignada ? 'exito' : ''">
           {{ persona.nombre }}
-          <span *ngIf="persona.grupoFamiliar">({{ persona.grupoFamiliar }})</span>
-          <button (click)="copiaValor(urlSorteo+persona.id)" class="btn">Copiar URL</button>
+          <span *ngIf="persona.grupoFamiliar"
+            >({{ persona.grupoFamiliar }})</span
+          >
+          <i
+            class="btn-icono material-icons omitir-color"
+            (click)="copiaValor(urlSorteo + persona.id)"
+            >content_copy</i
+          >
         </p>
       </li>
     </ol>
-    <p><i class="material-icons">add_alert</i>
-      Recuerda que a esta URL puedes ingresar para consultar si todos ya tiene asignado su amigo navideño.
-      <span class="strong">{{urlJuego}}</span>
+    <p class="campo-personzalizado">
+      <i class="material-icons">add_alert</i>
+      Recuerda que a esta URL puedes ingresar para consultar si todos ya tiene
+      asignado su amigo navideño.
+      <span class="texto-resaltado">{{ urlJuego }}</span>
     </p>
   </div>
 </div>

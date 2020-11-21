@@ -19,6 +19,7 @@ import { JuegoPersonaComponent } from './juego-persona/juego-persona.component';
 import { JuegoComponent } from './juego/juego.component';
 import { SharedModule } from './shared/shared.module';
 
+
 registerLocaleData(localeColombia, 'es-CO');
 
 @NgModule({

@@ -71,7 +71,7 @@ export class JuegoPersonaComponent implements OnInit {
           this.juego = dataJuego;
           this.juego.id = this.idJuego;
           const f: any = dataJuego.condiciones.fechaHoraJuego;
-          this.juego.condiciones.fechaHoraJuego = new Date(f.seconds);
+          this.juego.condiciones.fechaHoraJuego = new Date(f.seconds * 1000);
         } else {
           this.noEcontrado = true;
         }

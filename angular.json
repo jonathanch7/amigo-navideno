@@ -35,7 +35,9 @@
                 "node_modules/materialize-css"
               ]
             },            
-            "scripts": []
+            "scripts": [
+              "node_modules/materialize-css/dist/js/materialize.min.js"
+            ]
           },
           "configurations": {
             "production": {

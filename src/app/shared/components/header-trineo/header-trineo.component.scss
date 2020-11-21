@@ -5,7 +5,7 @@
 .lluvia{
   color: #fff;
   background:linear-gradient(#9df, #5047E4);
-  height: 40vh;
+  height: 35vh;
   margin: 0;
   display: flex;
   font-size: 2vw;
@@ -14,7 +14,7 @@
 
 .santa-image{
   position:fixed;
-  top: 10vh;
+  top: 5vh;
   right:0;
   left:0;
 }
@@ -34,7 +34,7 @@ img{
 
 @media (max-width: 740px) {
   .lluvia{
-    height: 30vh;
+    height: 20vh;
   }
   .santa-image{
     img{
