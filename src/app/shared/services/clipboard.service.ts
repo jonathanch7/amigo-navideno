@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ClipboardService {
   constructor() {}
 
-  public copiar(valor: string) {
+  public copiar(valor: string, el?: HTMLElement): void {
     const i = document.createElement('input');
     i.type = 'text';
     i.style.position = 'fixed';
@@ -20,5 +20,10 @@ export class ClipboardService {
     i.value = valor;
     document.execCommand('copy');
     document.body.removeChild(i);
+    if (el) {
+      const contenido = el.textContent;
+      el.textContent = 'thumb_up_alt';
+      setTimeout(() => (el.textContent = contenido), 200);
+    }
   }
 }
