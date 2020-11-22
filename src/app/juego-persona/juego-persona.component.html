@@ -1,79 +1,78 @@
-<div
-  *ngIf="
-    !noEcontrado && !noEcontradoJugadorAsignable && juego && juego.descripcion
-  "
->
-  <app-header-trineo></app-header-trineo>
+<app-header-trineo></app-header-trineo>
 
-  <section class="contenedor-ice">
-    <h2 class="titulo-personzalizado">{{ juego.descripcion | uppercase }}</h2>
-    <ul class="campo-personzalizado">
-      <li>
-        <i class="material-icons">attach_money</i>
-        <span class="texto-resaltado">Valor del Regalo:</span
-        >{{ juego.condiciones.valorRegalo | currency: "COP" }}
-      </li>
-      <li>
-        <i class="material-icons">date_range</i>
-        <span class="texto-resaltado">Fecha:</span>
-        {{
-          juego.condiciones.fechaHoraJuego | date: "EEEE dd 'de' MMMM 'del' y"
-        }}
-      </li>
-      <li>
-        <i class="material-icons">access_time</i>
-        <span class="texto-resaltado">Hora:</span
-        >{{ juego.condiciones.fechaHoraJuego | date: "h:mm a" }}
-      </li>
-      <li>
-        <i class="material-icons">explore</i>
-        <span class="texto-resaltado">Lugar:</span>{{ juego.condiciones.lugar }}
-      </li>
-      <li>
-        <i class="material-icons">create</i>
-        <span class="texto-resaltado">Observaciones:</span
-        >{{ juego.condiciones.observacion }}
-      </li>
-    </ul>
-    <ol>
-      <li *ngFor="let persona of juego.personas">
-        <p>
-          {{ persona.nombre }}
-          ({{ persona.grupoFamiliar }})
-        </p>
-      </li>
-    </ol>
-    <section
-      *ngIf="!noEcontradoJugadorAsignable"
-      class="center-align tamano-mediano"
-    >
-      <section *ngIf="jugadorAsignado">
-        <p class="campo-personzalizado">
-          ¡Hola <span class="texto-resaltado">{{ jugador.nombre }}</span
-          >, tu amigo navideño es
-          <span class="texto-resaltado">{{ jugadorAsignado.nombre }}</span
-          >!
-        </p>
-      </section>
-      <div *ngIf="!jugadorAsignado">
-        <p class="campo-personzalizado">
-          Hola <span class="texto-resaltado">{{ jugador.nombre }}</span
-          >, vamos a seleccionar tú amigo navideño
-        </p>
-        <div class="center-align">
-          <button
-            (click)="escogerPersona($event, this)"
-            class="waves-effect waves-light btn"
-          >
-            <i class="material-icons left">play_arrow</i>
-            {{ descripcionBotonEscoger }}
-          </button>
-        </div>
+<section
+  *ngIf="!noEcontrado && juego && juego.descripcion; else plantillaNoEncontrado"
+  class="contenedor-ice"
+>
+  <h2 class="titulo-personzalizado">{{ juego.descripcion | uppercase }}</h2>
+  <ul class="campo-personzalizado">
+    <li>
+      <i class="material-icons">attach_money</i>
+      <span class="texto-resaltado">Valor del Regalo:</span
+      >{{ juego.condiciones.valorRegalo | currency: "COP" }}
+    </li>
+    <li>
+      <i class="material-icons">date_range</i>
+      <span class="texto-resaltado">Fecha:</span>
+      {{ juego.condiciones.fechaHoraJuego | date: "EEEE dd 'de' MMMM 'del' y" }}
+    </li>
+    <li>
+      <i class="material-icons">access_time</i>
+      <span class="texto-resaltado">Hora:</span
+      >{{ juego.condiciones.fechaHoraJuego | date: "h:mm a" }}
+    </li>
+    <li>
+      <i class="material-icons">explore</i>
+      <span class="texto-resaltado">Lugar:</span>{{ juego.condiciones.lugar }}
+    </li>
+    <li>
+      <i class="material-icons">create</i>
+      <span class="texto-resaltado">Observaciones:</span
+      >{{ juego.condiciones.observacion }}
+    </li>
+  </ul>
+  <ol>
+    <li *ngFor="let persona of juego.personas">
+      <p>
+        {{ persona.nombre }}
+        ({{ persona.grupoFamiliar }})
+      </p>
+    </li>
+  </ol>
+  <section
+    *ngIf="!noEcontradoJugadorAsignable"
+    class="center-align tamano-mediano"
+  >
+    <section *ngIf="jugadorAsignado">
+      <p class="campo-personzalizado">
+        ¡Hola <span class="texto-resaltado">{{ jugador.nombre }}</span
+        >, tu amigo navideño es
+        <span class="texto-resaltado">{{ jugadorAsignado.nombre }}</span
+        >!
+      </p>
+    </section>
+    <div *ngIf="!jugadorAsignado">
+      <p class="campo-personzalizado">
+        Hola <span class="texto-resaltado">{{ jugador.nombre }}</span
+        >, vamos a seleccionar tú amigo navideño
+      </p>
+      <div class="center-align">
+        <button
+          (click)="escogerPersona($event, this)"
+          class="waves-effect waves-light btn btn-envio"
+        >
+          <i class="material-icons left">play_arrow</i>
+          {{ descripcionBotonEscoger }}
+        </button>
       </div>
-    </section>
-    <section *ngIf="noEcontradoJugadorAsignable">
-      No fue posible encontrar un jugador para asignar
-    </section>
+    </div>
   </section>
-</div>
-<div *ngIf="noEcontrado">Opps no se econtro ese juego</div>
+  <section *ngIf="noEcontradoJugadorAsignable" class="center-align tamano-mediano">
+    <p class="campo-personzalizado">No fue posible encontrar un jugador para asignar</p>
+  </section>
+</section>
+<ng-template #plantillaNoEncontrado>
+  <section *ngIf="fueBuscado" class="contenedor-ice">
+    <h2 class="titulo-personzalizado">No se encontró el juego</h2>
+  </section>
+</ng-template>

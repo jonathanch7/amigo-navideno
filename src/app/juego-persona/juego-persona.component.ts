@@ -21,6 +21,7 @@ export class JuegoPersonaComponent implements OnInit {
   public juego: Juego;
   public noEcontrado = false;
   public noEcontradoJugadorAsignable = false;
+  public fueBuscado = false;
   public descripcionBotonEscoger: string = 'Escoger';
 
   constructor(
@@ -55,10 +56,12 @@ export class JuegoPersonaComponent implements OnInit {
             }
           } else {
             this.noEcontrado = true;
+            this.fueBuscado = true;
           }
         });
     } else {
       this.noEcontrado = true;
+      this.fueBuscado = true;
     }
   }
 
@@ -74,6 +77,7 @@ export class JuegoPersonaComponent implements OnInit {
           this.juego.condiciones.fechaHoraJuego = new Date(f.seconds * 1000);
         } else {
           this.noEcontrado = true;
+          this.fueBuscado = true;
         }
       });
   }
@@ -126,9 +130,37 @@ export class JuegoPersonaComponent implements OnInit {
         const persConGrupo = disponibles.filter(
           (per) => per.grupoFamiliar != null
         );
-        return persConGrupo.length > 0 ? persConGrupo : disponibles;
+
+        if (persConGrupo.length > 0) {
+          return this.prioridadGrupos(persConGrupo);
+        }
+        return disponibles;
       })
     );
+  }
+
+  private prioridadGrupos(disponibles: Persona[]): Persona[] {
+    // Se da prioridad a los dos grupos con mas personas
+    const gruposPorCantidad = {};
+    disponibles.forEach((p) => {
+      if (gruposPorCantidad[p.grupoFamiliar]) {
+        gruposPorCantidad[p.grupoFamiliar] += 1;
+      } else {
+        gruposPorCantidad[p.grupoFamiliar] = 1;
+      }
+    });
+    if (Object.keys(gruposPorCantidad).length > 1) {
+      // Da prioridad a los dos grupos con más personas
+      const gruposPrioridad = Object.keys(gruposPorCantidad)
+        .sort((a, b) => gruposPorCantidad[b] - gruposPorCantidad[a])
+        .slice(0, 2);
+      return disponibles.filter((per) =>
+        gruposPrioridad.includes(per.grupoFamiliar)
+      );
+    } else {
+      const grupo = Object.keys(gruposPorCantidad)[0];
+      return disponibles.filter((per) => per.grupoFamiliar === grupo);
+    }
   }
 
   private getRamdomPersona(personas: Persona[]): Persona {

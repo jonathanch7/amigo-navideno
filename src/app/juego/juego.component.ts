@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { ICondition } from '../core/models/ICondition';
 import { Juego } from '../core/models/Juego';
+import { Persona } from '../core/models/Persona';
 import { JuegoService } from '../core/services/juego/juego.service';
 import { PersonaService } from '../core/services/persona/persona.service';
 import { ClipboardService } from '../shared/services/clipboard.service';
@@ -31,8 +32,8 @@ export class JuegoComponent implements OnInit {
     this.leerJuego();
   }
 
-  public copiaValor(valor: string): void {
-    this.cbService.copiar(valor);
+  public copiaValor(valor: string, el: HTMLElement): void {
+    this.cbService.copiar(valor, el);
   }
 
   private leerJuego(): void {
@@ -50,7 +51,7 @@ export class JuegoComponent implements OnInit {
             this.cargarPersonas();
             this.urlSorteo = `${location.origin}/juego/${this.juego.id}/sorteo/`;
           } else {
-            this.noEcontrado = false;
+            this.noEcontrado = true;
           }
         });
     } else {
@@ -67,7 +68,15 @@ export class JuegoComponent implements OnInit {
     this.personaService
       .getByConditions([condicion])
       .subscribe((dataPersonas) => {
-        this.juego.personas = dataPersonas;
+        // Ordenado por nombre descendente
+        this.juego.personas = dataPersonas.sort((a, b) =>
+          a.nombre.localeCompare(b.nombre)
+        );
+        this.juego.personas.forEach((persona) => {
+          persona.escogidaPor = this.juego.personas.find(
+            (per) => per.idPersonaAsignada === persona.id
+          );
+        });
       });
   }
 }
