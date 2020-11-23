@@ -7,5 +7,7 @@ export interface Persona extends IModelo {
     grupoFamiliar?: string;
     idPersonaRestringida?: string;
     idPersonaAsignada?: string;
+    nombrePersonaAsignada?: string;
+    grupoFamiliarPersonaAsignada?: string;
     escogidaPor?: Persona;
 }

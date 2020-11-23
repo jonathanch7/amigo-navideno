@@ -17,12 +17,10 @@ export class JuegoPersonaComponent implements OnInit {
   private idJuego: string;
   private idJugador: string;
   public jugador: Persona;
-  public jugadorAsignado: Persona;
   public juego: Juego;
-  public noEcontrado = false;
   public noEcontradoJugadorAsignable = false;
   public fueBuscado = false;
-  public descripcionBotonEscoger: string = 'Escoger';
+  public descripcionBotonEscoger = 'Escoger';
 
   constructor(
     private router: ActivatedRoute,
@@ -46,21 +44,23 @@ export class JuegoPersonaComponent implements OnInit {
           if (per) {
             this.jugador = per;
             this.cargarJuego();
-            if (this.jugador.idPersonaAsignada) {
+            if (
+              this.jugador.idPersonaAsignada &&
+              !this.jugador.nombrePersonaAsignada
+            ) {
               this.personaService
                 .getById(this.jugador.idPersonaAsignada)
                 .pipe(take(1))
-                .subscribe((per) => {
-                  this.jugadorAsignado = per;
+                .subscribe((perAsig) => {
+                  this.jugador.idPersonaAsignada = perAsig.id;
+                  this.jugador.nombrePersonaAsignada = perAsig.nombre;
                 });
             }
           } else {
-            this.noEcontrado = true;
             this.fueBuscado = true;
           }
         });
     } else {
-      this.noEcontrado = true;
       this.fueBuscado = true;
     }
   }
@@ -76,7 +76,6 @@ export class JuegoPersonaComponent implements OnInit {
           const f: any = dataJuego.condiciones.fechaHoraJuego;
           this.juego.condiciones.fechaHoraJuego = new Date(f.seconds * 1000);
         } else {
-          this.noEcontrado = true;
           this.fueBuscado = true;
         }
       });
@@ -90,7 +89,7 @@ export class JuegoPersonaComponent implements OnInit {
   public escogerPersona(event: Event, btn: HTMLButtonElement): void {
     event.preventDefault();
     btn.disabled = true;
-    btn.innerText = 'Escogiendo...';
+    this.descripcionBotonEscoger = 'Escogiendo...';
     const condiciones: ICondition[] = [];
     condiciones.push({
       campo: 'idJuego',
@@ -99,11 +98,15 @@ export class JuegoPersonaComponent implements OnInit {
     });
 
     this.getPersonas(condiciones).subscribe((personas) => {
-      this.jugadorAsignado = this.getRamdomPersona(personas);
-      if (this.jugadorAsignado) {
-        this.personaService.update(this.jugador.id, {
-          idPersonaAsignada: this.jugadorAsignado.id,
-        });
+      const jugadorAsignado: Persona = this.getRamdomPersona(personas);
+      if (jugadorAsignado) {
+        const dataUpdate: Persona = {
+          idPersonaAsignada: jugadorAsignado.id,
+          nombrePersonaAsignada: jugadorAsignado.nombre,
+          grupoFamiliarPersonaAsignada: jugadorAsignado.grupoFamiliar,
+        };
+        this.personaService.update(this.jugador.id, dataUpdate);
+        this.jugador = { ...this.jugador, ...dataUpdate };
       } else {
         this.noEcontradoJugadorAsignable = true;
       }

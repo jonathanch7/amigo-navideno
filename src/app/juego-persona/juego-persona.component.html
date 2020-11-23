@@ -1,7 +1,7 @@
 <app-header-trineo></app-header-trineo>
 
 <section
-  *ngIf="!noEcontrado && juego && juego.descripcion; else plantillaNoEncontrado"
+  *ngIf="juego && juego.descripcion; else plantillaNoEncontrado"
   class="contenedor-ice"
 >
   <h2 class="titulo-personzalizado">{{ juego.descripcion | uppercase }}</h2>
@@ -31,27 +31,19 @@
       >{{ juego.condiciones.observacion }}
     </li>
   </ul>
-  <ol>
-    <li *ngFor="let persona of juego.personas">
-      <p>
-        {{ persona.nombre }}
-        ({{ persona.grupoFamiliar }})
-      </p>
-    </li>
-  </ol>
   <section
     *ngIf="!noEcontradoJugadorAsignable"
     class="center-align tamano-mediano"
   >
-    <section *ngIf="jugadorAsignado">
+    <section *ngIf="jugador.nombrePersonaAsignada">
       <p class="campo-personzalizado">
         ¡Hola <span class="texto-resaltado">{{ jugador.nombre }}</span
         >, tu amigo navideño es
-        <span class="texto-resaltado">{{ jugadorAsignado.nombre }}</span
+        <span class="texto-resaltado">{{ jugador.nombrePersonaAsignada }}</span
         >!
       </p>
     </section>
-    <div *ngIf="!jugadorAsignado">
+    <div *ngIf="!jugador.nombrePersonaAsignada">
       <p class="campo-personzalizado">
         Hola <span class="texto-resaltado">{{ jugador.nombre }}</span
         >, vamos a seleccionar tú amigo navideño
@@ -67,8 +59,17 @@
       </div>
     </div>
   </section>
-  <section *ngIf="noEcontradoJugadorAsignable" class="center-align tamano-mediano">
-    <p class="campo-personzalizado">No fue posible encontrar un jugador para asignar</p>
+  <section
+    *ngIf="noEcontradoJugadorAsignable"
+    class="center-align tamano-mediano"
+  >
+    <p class="campo-personzalizado">
+      No fue posible encontrar un jugador para asignar, puede ser porque no hay
+      jugadores disponibles
+      <span *ngIf="jugador.grupoFamiliar"
+        >o los jugadores disponibles son del mismo grupo familiar</span
+      >.
+    </p>
   </section>
 </section>
 <ng-template #plantillaNoEncontrado>

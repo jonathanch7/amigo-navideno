@@ -143,20 +143,12 @@ export class NuevoJuegoComponent implements OnInit, AfterViewInit {
     const campo: AbstractControl = esJuego
       ? this.campoJuego(nombreCampo)
       : this.campoCondicion(nombreCampo);
-    return (
-      campo.errors &&
-      campo.dirty &&
-      this.campoCondicion(nombreCampo).hasError(error)
-    );
+    return campo.errors && campo.dirty && campo.hasError(error);
   }
 
   public campoCondicionError(nombreCampo: string, error: string): boolean {
     const campo: AbstractControl = this.campoCondicion(nombreCampo);
-    return (
-      campo.errors &&
-      campo.dirty &&
-      this.campoCondicion(nombreCampo).hasError(error)
-    );
+    return campo.errors && campo.dirty && campo.hasError(error);
   }
 
   public cambioCampoCondicion(nombre: string, target: HTMLInputElement): void {
@@ -190,26 +182,26 @@ export class NuevoJuegoComponent implements OnInit, AfterViewInit {
           idJuego: this.idJuego,
           idPersonaRestringida: null,
         });
+        per.id = data.id;
         personasCreadas.push(data);
       }
-
+      console.log(this.personas);
+      console.log(personasCreadas);
       // Se actualiza el id de la persona restringida
       for (const per of this.personas) {
-        if (per.id) {
-          const personaRestringida: Persona = personasCreadas.find(
-            (perc) => perc.nombre === per.idPersonaRestringida
-          );
-          if (personaRestringida) {
-            this.personaService.update(per.id, {
-              idPersonaRestringida: personaRestringida.id,
-            });
-          }
+        const personaRestringida: Persona = personasCreadas.find(
+          (perc) => perc.nombre === per.idPersonaRestringida
+        );
+        if (personaRestringida) {
+          this.personaService.update(per.id, {
+            idPersonaRestringida: personaRestringida.id,
+          });
         }
       }
-      this.personas = null;
-      this.juegoForm.reset();
-      this.router.navigate(['/juego', this.idJuego]);
     }
+    this.personas = null;
+    this.juegoForm.reset();
+    this.router.navigate(['/juego', this.idJuego]);
   }
 
   private construirForm(): void {
@@ -227,10 +219,12 @@ export class NuevoJuegoComponent implements OnInit, AfterViewInit {
 
   private inicializarSelects(): void {
     setTimeout(() => {
-      const el: HTMLElement = this.listado.nativeElement;
-      Array.from(el.getElementsByTagName('select')).forEach((element) => {
-        M.FormSelect.init(element);
-      });
+      if (this.listado && this.listado.nativeElement) {
+        const el: HTMLElement = this.listado.nativeElement;
+        Array.from(el.getElementsByTagName('select')).forEach((element) => {
+          M.FormSelect.init(element);
+        });
+      }
     }, 200);
   }
 
